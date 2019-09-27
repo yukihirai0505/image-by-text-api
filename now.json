@@ -1,11 +1,28 @@
 {
-    "version": 2,
-    "name": "image-by-text-api",
-    "alias": "image-by-text-api.now.sh",
-    "builds": [
-        { "src": "index.js", "use": "@now/node" }
-    ],
-    "routes": [
-        { "src": "/(.*)", "dest": "index.js" }
-    ]
+  "version": 2,
+  "name": "image-by-text-api",
+  "alias": "image-by-text-api.now.sh",
+  "builds": [
+    {
+      "src": "fonts/*",
+      "use": "@now/static"
+    },
+    {
+      "src": "utils/*.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "api/*.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/$1"
+    }
+  ],
+  "env": {
+    "CLOUDINARY_URL": "@cloudinary-url"
+  }
 }
